@@ -13,6 +13,23 @@ def bits_iter(time=None):
         else:
             yield False
 
+def decode_bits(bits):
+    fract = 0.0
+    exp = 1
+    for bit in bits:
+        if bit:
+            fract += 1 / 2 ** exp
+        exp += 1
+    return datetime.time() + datetime.timedelta(days=fract)
+
+def decode_hex(hex_string):
+    for hex_digit in hex_string:
+        nybble = int(hex_digit, 16)
+        yield bool(nybble & 0b1000)
+        yield bool(nybble & 0b0100)
+        yield bool(nybble & 0b0010)
+        yield bool(nybble & 0b0001)
+
 def fraction_of_day(time=None):
     if time is None:
         time = datetime.datetime.now().time()
