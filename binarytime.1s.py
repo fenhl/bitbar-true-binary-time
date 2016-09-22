@@ -25,4 +25,8 @@ def hex(bits):
         yield 8 * nybble[0] + 4 * nybble[1] + 2 * nybble[2] + 1 * nybble[3]
 
 if __name__ == '__main__':
-    print(''.join('{:X}'.format(nybble) for nybble in hex(more_itertools.take(12, bits_iter()))))
+    now = datetime.datetime.now()
+    print(''.join('{:X}'.format(nybble) for nybble in hex(more_itertools.take(12, bits_iter(now.time())))))
+    print('---')
+    print('{:%H:%M:%S}'.format(now.time()))
+    print('w{0[1]}.{0[2]}: {1:%Y-%m-%d}'.format(now.date().isocalendar(), now.date()))
