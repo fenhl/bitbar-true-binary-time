@@ -20,7 +20,7 @@ def decode_bits(bits):
         if bit:
             fract += 1 / 2 ** exp
         exp += 1
-    return datetime.time() + datetime.timedelta(days=fract)
+    return (datetime.datetime(1970, 1, 1) + datetime.timedelta(days=fract)).time()
 
 def decode_hex(hex_string):
     for hex_digit in hex_string:
